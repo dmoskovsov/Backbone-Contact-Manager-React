@@ -5,8 +5,9 @@ requirejs.config({
         'underscore': '../../vendor/underscore/underscore',
         'backbone': '../../vendor/backbone/backbone',
         "react": '../../vendor/react/react',
-        //"jsx": "../libs/jsx",
-        "JSXTransformer": "../../vendor/react/JSXTransformer"
+        "jsx": "../../vendor/jsx-requirejs-plugin/js/jsx",
+        "JSXTransformer": "../../vendor/react/JSXTransformer",
+        "text": "../../vendor/requirejs-text/text"
     },
     'shim': {
         'underscore': {
@@ -23,5 +24,4 @@ require([
     'router'
 ], function (Router) {
     new Router();
-})
-;
+});

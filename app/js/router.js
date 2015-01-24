@@ -1,14 +1,15 @@
 /*global define*/
 'use strict';
 define([
+    'react',
     'backbone',
     'jquery',
     'underscore',
-    'views/contacts',
+    'jsx!views/contacts',
     'views/contactForm',
     'models/contact',
     'collections/contacts'
-], function (Backbone, $, _, ContactsView, ContactForm, ContactModel, ContactsCollection) {
+], function (React, Backbone, $, _, ContactsView, ContactForm, ContactModel, ContactsCollection) {
     var contacts = new ContactsCollection(getContacts().contacts);
 
     var Router = Backbone.Router.extend({
@@ -22,10 +23,7 @@ define([
             'contacts/edit/:id': 'editContact'
         },
         showContacts: function () {
-            var contactsView = new ContactsView({
-                collection: contacts
-            });
-            $('.main-container').html(contactsView.render().$el);
+            React.render(ContactsView({contacts: contacts}), document.getElementById('main-container'));
         },
         newContact: function () {
             var newContactForm = new ContactForm({

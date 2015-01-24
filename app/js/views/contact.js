@@ -1,33 +1,46 @@
 /*global define*/
 'use strict';
-define([
-    'jquery',
-    'underscore',
-    'backbone'
-], function ($, _, Backbone) {
-    var ContactView = Backbone.View.extend({
-        tagName: 'li',
-        className: 'media col-md-6 col-lg-4',
-        template: _.template($('#tpl-contact').html()),
-
-        events: {
-            'click .delete-contract': 'onClickDelete'
+define(['react',
+    'underscore'
+], function (React, _) {
+    var ContactView = React.createClass({
+        getInitialState: function () {
+            return {contact: _.clone(this.props.contact.attributes)};
+            //todo dmoskovtsov delete
         },
-
-        initialize: function () {
-            this.listenTo(this.model, 'remove', this.remove);
-        },
-
         render: function () {
-            var html = this.template(this.model.toJSON());
-            this.$el.append(html);
-            return this;
-        },
-
-        onClickDelete: function (e) {
-            e.preventDefault();
-            this.model.collection.remove(this.model);
+            return <div>
+                <li className="media col-md-6 col-lg-4">
+                    <div className="thumbnail">
+                        <img className="media-object"
+                            src={'app/img/faces/' + this.state.contact.avatar}/>
+                    </div>
+                    <div className="media-heading">
+                        <h3>
+                        { this.state.contact.name }
+                            <small>
+                                <a href={'#contacts/edit/' + this.state.contact.id }>
+                                    <span className="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a href={'#contacts/delete/' + this.state.contact.id }>
+                                    <span className="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </small>
+                        </h3>
+                    </div>
+                    <div className="media-body">
+                        <dl>
+                            <dt>Phone Number:</dt>
+                            <dd>{ this.state.contact.tel }</dd>
+                            <dt>Email:</dt>
+                            <dd>{ this.state.contact.email }</dd>
+                        </dl>
+                    </div>
+                    <hr/>
+                </li>
+            </div>
         }
     });
+
     return ContactView;
 });

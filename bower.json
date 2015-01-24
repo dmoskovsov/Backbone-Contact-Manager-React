@@ -12,6 +12,8 @@
     "jquery": "~2.1.0",
     "underscore": "~1.5.2",
     "requirejs": "~2.1.10",
-    "react": "~0.12.2"
+    "react": "~0.12.2",
+    "jsx-requirejs-plugin": "0.5.2",
+    "requirejs-text": "~2.0.13"
   }
 }
