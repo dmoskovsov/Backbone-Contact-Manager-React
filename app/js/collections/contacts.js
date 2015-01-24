@@ -2,10 +2,12 @@
 'use strict';
 define([
     'backbone',
-    'models/contact'
-], function (Backbone, ContactModel) {
+    'models/contact',
+    'backboneLocalstorage'
+], function (Backbone, ContactModel, BackboneLocalStorage) {
     var ContactsCollection = Backbone.Collection.extend({
-        model: ContactModel
+        model: ContactModel,
+        localStorage: new BackboneLocalStorage('contact-manager-storage')
     });
     return ContactsCollection;
 });

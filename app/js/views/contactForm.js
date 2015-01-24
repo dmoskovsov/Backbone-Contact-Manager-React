@@ -10,11 +10,13 @@ define(['react', 'underscore'
             this.props.contact.set('name', this.state.contact.name);
             this.props.contact.set('tel', this.state.contact.tel);
             this.props.contact.set('email', this.state.contact.email);
+            this.props.contact.save();
         }
         , create: function () {
             var contact = this.state.contact;
             contact.id = this.getNextId();
-            this.props.contacts.add(contact);
+            var savedContact = this.props.contacts.add(contact);
+            savedContact.save();
         },
         handleChange: function (field, event) {
             var nextState = this.state.contact;

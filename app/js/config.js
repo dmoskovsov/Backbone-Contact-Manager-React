@@ -4,6 +4,7 @@ requirejs.config({
         'jquery': '../../vendor/jquery/dist/jquery',
         'underscore': '../../vendor/underscore/underscore',
         'backbone': '../../vendor/backbone/backbone',
+        'backboneLocalstorage': '../../vendor/backbone.localStorage/backbone.localStorage',
         "react": '../../vendor/react/react',
         "jsx": "../../vendor/jsx-requirejs-plugin/js/jsx",
         "JSXTransformer": "../../vendor/react/JSXTransformer",
@@ -16,6 +17,10 @@ requirejs.config({
         'backbone': {
             'deps': ['jquery', 'underscore'],
             'exports': 'Backbone'
+        },
+        backboneLocalstorage: {
+            deps: ['backbone'],
+            exports: 'Store'
         }
     }
 });

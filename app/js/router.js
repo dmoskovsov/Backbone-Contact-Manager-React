@@ -10,7 +10,8 @@ define([
     'models/contact',
     'collections/contacts'
 ], function (React, Backbone, $, _, ContactsView, ContactFormView, ContactModel, ContactsCollection) {
-    var contacts = new ContactsCollection(getContacts().contacts);
+    var contacts = new ContactsCollection();
+    contacts.fetch();
 
     var Router = Backbone.Router.extend({
         initialize: function () {

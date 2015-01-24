@@ -6,8 +6,7 @@ define(['react', 'jsx!views/contact'], function (React, ContactView) {
             return {contacts: this.props.contacts.models};
         },
         removeContact: function (contactId) {
-            var contact = this.props.contacts.get(contactId);
-            this.props.contacts.remove(contact);
+            this.props.contacts.get(contactId).destroy();
             this.setState({contacts: this.props.contacts.models});
         },
         render: function () {
