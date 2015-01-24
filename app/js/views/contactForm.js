@@ -6,10 +6,15 @@ define(['react', 'underscore'
         getInitialState: function () {
             return {contact: _.clone(this.props.contact.attributes)};
         },
-        addContact: function () {
+        edit: function () {
             this.props.contact.set('name', this.state.contact.name);
             this.props.contact.set('tel', this.state.contact.tel);
             this.props.contact.set('email', this.state.contact.email);
+        }
+        , create: function () {
+            var contact = this.state.contact;
+            contact.id = this.getNextId();
+            this.props.contacts.add(contact);
         },
         handleChange: function (field, event) {
             var nextState = this.state.contact;
@@ -18,7 +23,8 @@ define(['react', 'underscore'
         },
         render: function () {
             return <div>
-                <h2 className="page-header text-center">Contact</h2>
+                <h2 className="page-header text-center">
+                {this.props.type === 'edit' ? 'Edit' : 'Create'} Contact</h2>
                 <form role="form"
                     action="#contacts"
                     className="form-horizontal contract-form" >
@@ -53,7 +59,7 @@ define(['react', 'underscore'
                     </div>
                     <div className="form-group">
                         <div className="col-sm-offset-4 col-sm-3">
-                            <button onClick={this.addContact}
+                            <button onClick={this.props.type === 'edit' ? this.edit : this.create}
                                 className="btn btn-outline btn-lg btn-block">Submit
                             </button>
                         </div>
@@ -64,6 +70,9 @@ define(['react', 'underscore'
                     </div>
                 </form>
             </div>
+        },
+        getNextId: function () {
+            return this.props.contacts.isEmpty() ? 1 : (_.max(this.props.contacts.pluck('id')) + 1);
         }
     });
     return ContactFormView;

@@ -27,35 +27,22 @@ define([
             React.render(contactsView, document.getElementById('main-container'));
         },
         newContact: function () {
-            React.render(ContactFormView({contact: new ContactModel()}), document.getElementById('main-container'));
-
-            //var newContactForm = new ContactForm({
-            //    model: new ContactModel()
-            //});
-            //newContactForm.on('form:submitted', function (attrs) {
-            //    attrs.id = contacts.isEmpty() ? 1 : (_.max(contacts.pluck('id')) + 1);
-            //    contacts.add(attrs);
-            //    this.navigate('contacts', true);
-            //});
-            //$('.main-container').html(newContactForm.render().$el);
+            React.render(ContactFormView({
+                contact: new ContactModel(),
+                contacts: contacts,
+                type: 'create'
+            }), document.getElementById('main-container'));
         },
         editContact: function (id) {
             var contact = contacts.get(id);
             if (contact) {
-                React.render(ContactFormView({contact: contact}), document.getElementById('main-container'));
-
-                //editContactForm = new ContactFormView({
-                //    contact: contact
-                //});
-                //editContactForm.on('form:submitted', function (attrs) {
-                //    contact.set(attrs);
-                //    this.navigate('contacts', true);
-                //});
-                //
-                //$('.main-container').html(editContactForm.render().$el);
-            } else {
-                this.navigate('contacts', true);
+                React.render(ContactFormView({
+                    contact: contact,
+                    type: 'edit'
+                }), document.getElementById('main-container'));
+                return;
             }
+            this.navigate('contacts', true);
         }
     });
     return Router;
