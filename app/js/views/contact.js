@@ -17,9 +17,11 @@ define(['react', 'underscore'
                         <h3>
                         { this.state.contact.name }
                             <small>
-                                <span className="glyphicon glyphicon-pencil"></span>
-                                <span onClick={this.props.remove}
-                                        className="glyphicon glyphicon-trash"></span>
+                                <a href={'#contacts/edit/' + this.state.contact.id }>
+                                    <span className="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <div onClick={this.props.remove}
+                                    className="glyphicon glyphicon-trash"></div>
                             </small>
                         </h3>
                     </div>

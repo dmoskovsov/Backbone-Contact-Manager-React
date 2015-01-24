@@ -6,16 +6,28 @@ define(['react', 'underscore'
         getInitialState: function () {
             return {contact: _.clone(this.props.contact.attributes)};
         },
+        addContact: function () {
+            this.props.contact.set('name', this.state.contact.name);
+            this.props.contact.set('tel', this.state.contact.tel);
+            this.props.contact.set('email', this.state.contact.email);
+        },
+        handleChange: function (field, event) {
+            var nextState = this.state.contact;
+            nextState[field] = event.target.value;
+            this.setState({contact: nextState});
+        },
         render: function () {
             return <div>
                 <h2 className="page-header text-center">Contact</h2>
                 <form role="form"
-                    className = "form-horizontal contract-form" >
+                    action="#contacts"
+                    className="form-horizontal contract-form" >
                     <div className="form-group">
                         <label className="col-sm-4 control-label">Full name:</label>
                         <div className="col-sm-6">
                             <input type="text"
                                 className="form-control contact-name-input"
+                                onChange={this.handleChange.bind(this, 'name')}
                                 value={ this.state.contact.name }/>
                         </div>
                     </div>
@@ -25,6 +37,7 @@ define(['react', 'underscore'
                         <div className="col-sm-6">
                             <input type="email"
                                 className="form-control contact-email-input"
+                                onChange={this.handleChange.bind(this, 'email')}
                                 value={ this.state.contact.email }/>
                         </div>
                     </div>
@@ -34,12 +47,13 @@ define(['react', 'underscore'
                         <div className="col-sm-6">
                             <input type="tel"
                                 className="form-control contact-tel-input"
+                                onChange={this.handleChange.bind(this, 'tel')}
                                 value={ this.state.contact.tel }/>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-offset-4 col-sm-3">
-                            <button type="submit"
+                            <button onClick={this.addContact}
                                 className="btn btn-outline btn-lg btn-block">Submit
                             </button>
                         </div>

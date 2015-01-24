@@ -1,16 +1,17 @@
 /*global define*/
 'use strict';
-define(['react', 'underscore', 'jsx!views/contact'], function (React, _, ContactView) {
+define(['react', 'jsx!views/contact'], function (React, ContactView) {
     var ContactsView = React.createClass({
+        getInitialState: function () {
+            return {contacts: this.props.contacts.models};
+        },
         removeContact: function (contactId) {
             var contact = this.props.contacts.get(contactId);
             this.props.contacts.remove(contact);
-            this.setProps({'contacts': this.props.contacts});
+            this.setState({contacts: this.props.contacts.models});
         },
         render: function () {
-
-            var contacts = this.props.contacts.models.map(function (contact) {
-
+            var contacts = this.state.contacts.map(function (contact) {
                 return <ContactView remove={this.removeContact.bind(this, contact.id)}
                     key={contact.id}
                     contact={contact}/>;
@@ -26,7 +27,6 @@ define(['react', 'underscore', 'jsx!views/contact'], function (React, _, Contact
                     {contacts}
                 </ul>
             </div>
-
         }
     });
     return ContactsView;
