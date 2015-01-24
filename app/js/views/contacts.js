@@ -1,17 +1,28 @@
-ContactManager.Views.Contacts = Backbone.View.extend({
-  template: _.template($('#tpl-contacts').html()),
+/*global define*/
+'use strict';
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/contact'
+], function ($, _, Backbone, ContactView) {
 
-  renderOne: function(contact) {
-    var itemView = new ContactManager.Views.Contact({model: contact});
-    this.$('.contacts-container').append(itemView.render().$el);
-  },
+    var ContactsView = Backbone.View.extend({
+        template: _.template($('#tpl-contacts').html()),
 
-  render: function() {
-    var html = this.template();
-    this.$el.html(html);
+        renderOne: function (contact) {
+            var itemView = new ContactView({model: contact});
+            this.$('.contacts-container').append(itemView.render().$el);
+        },
 
-    this.collection.each(this.renderOne, this);
+        render: function () {
+            var html = this.template();
+            this.$el.html(html);
 
-    return this;
-  }
+            this.collection.each(this.renderOne, this);
+
+            return this;
+        }
+    });
+    return ContactsView;
 });
