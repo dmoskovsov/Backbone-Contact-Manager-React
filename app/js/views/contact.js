@@ -1,12 +1,10 @@
 /*global define*/
 'use strict';
-define(['react',
-    'underscore'
+define(['react', 'underscore'
 ], function (React, _) {
     var ContactView = React.createClass({
         getInitialState: function () {
             return {contact: _.clone(this.props.contact.attributes)};
-            //todo dmoskovtsov delete
         },
         render: function () {
             return <div>
@@ -19,12 +17,9 @@ define(['react',
                         <h3>
                         { this.state.contact.name }
                             <small>
-                                <a href={'#contacts/edit/' + this.state.contact.id }>
-                                    <span className="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href={'#contacts/delete/' + this.state.contact.id }>
-                                    <span className="glyphicon glyphicon-trash"></span>
-                                </a>
+                                <span className="glyphicon glyphicon-pencil"></span>
+                                <span onClick={this.props.remove}
+                                        className="glyphicon glyphicon-trash"></span>
                             </small>
                         </h3>
                     </div>

@@ -6,10 +6,10 @@ define([
     'jquery',
     'underscore',
     'jsx!views/contacts',
-    'views/contactForm',
+    'jsx!views/contactForm',
     'models/contact',
     'collections/contacts'
-], function (React, Backbone, $, _, ContactsView, ContactForm, ContactModel, ContactsCollection) {
+], function (React, Backbone, $, _, ContactsView, ContactFormView, ContactModel, ContactsCollection) {
     var contacts = new ContactsCollection(getContacts().contacts);
 
     var Router = Backbone.Router.extend({
@@ -23,38 +23,38 @@ define([
             'contacts/edit/:id': 'editContact'
         },
         showContacts: function () {
-            React.render(ContactsView({contacts: contacts}), document.getElementById('main-container'));
+            var contactsView = React.createElement(ContactsView, {contacts: contacts});
+            React.render(contactsView, document.getElementById('main-container'));
         },
         newContact: function () {
-            var newContactForm = new ContactForm({
-                model: new ContactModel()
-            });
+            React.render(ContactFormView({contact: new ContactModel()}), document.getElementById('main-container'));
 
-            newContactForm.on('form:submitted', function (attrs) {
-                attrs.id = contacts.isEmpty() ? 1 : (_.max(contacts.pluck('id')) + 1);
-                contacts.add(attrs);
-                Router.navigate('contacts', true);
-            });
-
-            $('.main-container').html(newContactForm.render().$el);
+            //var newContactForm = new ContactForm({
+            //    model: new ContactModel()
+            //});
+            //newContactForm.on('form:submitted', function (attrs) {
+            //    attrs.id = contacts.isEmpty() ? 1 : (_.max(contacts.pluck('id')) + 1);
+            //    contacts.add(attrs);
+            //    this.navigate('contacts', true);
+            //});
+            //$('.main-container').html(newContactForm.render().$el);
         },
         editContact: function (id) {
-            var contact = contacts.get(id),
-                editContactForm;
-
+            var contact = contacts.get(id);
             if (contact) {
-                editContactForm = new ContactForm({
-                    model: contact
-                });
+                React.render(ContactFormView({contact: contact}), document.getElementById('main-container'));
 
-                editContactForm.on('form:submitted', function (attrs) {
-                    contact.set(attrs);
-                    Router.navigate('contacts', true);
-                });
-
-                $('.main-container').html(editContactForm.render().$el);
+                //editContactForm = new ContactFormView({
+                //    contact: contact
+                //});
+                //editContactForm.on('form:submitted', function (attrs) {
+                //    contact.set(attrs);
+                //    this.navigate('contacts', true);
+                //});
+                //
+                //$('.main-container').html(editContactForm.render().$el);
             } else {
-                Router.navigate('contacts', true);
+                this.navigate('contacts', true);
             }
         }
     });
