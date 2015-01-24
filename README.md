@@ -23,3 +23,7 @@ http://dmytroyarmak.github.io/codeangels-backbone-introduction
 ## Next lesson
 
 https://github.com/dmytroyarmak/marionette-contact-manager
+
+## Compile styles
+__grunt build__ for single run <br/> 
+ __grunt__ for running in background 
