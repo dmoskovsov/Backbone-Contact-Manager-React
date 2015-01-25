@@ -19,12 +19,7 @@ var ContactView = React.createClass({
                     className='contact-image'
                     src={'/faces/' + this.state.contact.avatar}/>
 
-                <h4 className="contact-name">{ this.state.contact.name }</h4>
-
-                <IconButton onClick={this.props.remove}
-                    tooltip='delete'
-                    className='delete-icon'
-                    icon="action-highlight-remove"></IconButton>
+                <h5 className="contact-name">{ this.state.contact.name + ' ' + this.state.contact.lastName }</h5>
             </div>
         </a>
     }

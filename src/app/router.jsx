@@ -17,7 +17,8 @@ var Router = Backbone.Router.extend({
         '': 'showContacts',
         'contacts': 'showContacts',
         'contacts/new': 'newContact',
-        'contacts/edit/:id': 'editContact'
+        'contacts/edit/:id': 'editContact',
+        'contacts/delete/:id': 'deleteContact'
     },
     showContacts: function () {
         React.render(<ContactsView contacts={this.contacts}/>, document.getElementById('contact-list'));
@@ -35,6 +36,13 @@ var Router = Backbone.Router.extend({
             React.render(<ContactFormView contact={contact}
                 type={'edit'}/>, document.getElementById('contact-detail'));
             return;
+        }
+        this.navigate('contacts', true);
+    },
+    deleteContact: function (id) {
+        var contact = this.contacts.get(id);
+        if (contact) {
+            contact.destroy();
         }
         this.navigate('contacts', true);
     }

@@ -4,10 +4,12 @@ var Backbone = require('backbone'),
 
 var ContactModel = Backbone.Model.extend({
     defaults: {
-        name: null,
-        tel: null,
-        email: null,
-        avatar: null
+        name: '',
+        lastName: '',
+        tel: '',
+        email: '',
+        avatar: '',
+        note: ''
     },
     initialize: function () {
         this.set('avatar', _.random(1, 15) + '.jpg');
