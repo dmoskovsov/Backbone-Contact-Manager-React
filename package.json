@@ -1,21 +1,47 @@
 {
   "name": "backbone-contact-manager",
   "version": "1.0.0",
-  "description": "Backbone Contact Manager ========================",
-  "main": "config.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dmoskovsov/Backbone-Contact-Manager-React.git"
+  "description": "Sample project that uses backbone, react, requirejs, and material-ui",
+  "homepage": "http://backbone-example.herokuapp.com/",
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dmoskovsov/Backbone-Contact-Manager-React/issues"
-  },
-  "homepage": "https://github.com/dmoskovsov/Backbone-Contact-Manager-React",
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-sass": "^0.17.0"
+    "browser-sync": "^1.8.1",
+    "browserify": "^7.0.3",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-less": "^2.0.1",
+    "gulp-notify": "^2.1.0",
+    "gulp-sourcemaps": "^1.2.8",
+    "gulp-util": "^3.0.1",
+    "pretty-hrtime": "^0.2.2",
+    "reactify": "^0.17.1",
+    "require-dir": "^0.1.0",
+    "underscore": "^1.7.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
+  },
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone.localstorage": "^1.1.16",
+    "bootstrap": "^3.3.2",
+    "jquery": "^2.1.3",
+    "material-ui": "^0.5.0",
+    "material-ui-sass": "^0.5.2",
+    "react": "^0.12.2",
+    "react-layout": "^0.2.0",
+    "react-tap-event-plugin": "^0.1.3",
+    "react-tools": "^0.12.2",
+    "reactify": "^1.0.0",
+    "requirejs-text": "^2.0.12",
+    "underscore": "^1.7.0"
   }
 }
